@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>~</title>
+		<style>
+            @font-face {
+                font-family: "Windows Regular";
+                src: url("Windows\ Regular.ttf");
+            }
+			body {
+                font-family: "Windows Regular" !important;
+                background: #000;
+                margin: 0;
+            }
+            canvas {
+                background: #999;
+                image-rendering: pixelated;
+                left: 50vw;
+                top: 50vh;
+                transform: translateX(-50%) translateY(-50%);
+                position: fixed;
+            }
+            @keyframes move-background {
+                0% {
+                    background-position: 0 0;
+                }
+                100% {
+                    background-position: 0 50px;
+                }
+            }
+            #scanline-overlay {
+                background: repeating-linear-gradient(transparent, transparent 30px, rgba(0, 0, 0, 0.025) 30px, rgba(0, 0, 0, 0.025) 50px);
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                pointer-events: none;
+                animation: move-background 1.2s linear infinite;
+                z-index: 100;
+            }
+            #ui-overlay {
+                width: calc(100vw - 60px);
+                height: calc(100vh - 60px);
+                left: 50vw;
+                top: 50vh;
+                transform: translateX(-50%) translateY(-50%);
+                position: fixed;
+                z-index: 10;
+            }
+            .window {
+                padding: 0px;
+                border: 3px ridge #d5c6c6;
+                background: #d5c6c6;
+                width: fit-content;
+                text-align: left;
+            }
+            .window-header {
+                background: linear-gradient(90deg, #0a246a, #a7caf0);
+                color: #fff;
+                padding: 5px 10px;
+                font-weight: bold;
+            }
+            .window-content {
+                padding: 10px;
+            }
+		</style>
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "https://unpkg.com/three@v0.159.0/build/three.module.js",
+                    "three/addons/": "https://unpkg.com/three@v0.159.0/examples/jsm/"
+                }
+            }
+        </script>
+        <script type="module" src="main.js"></script>
+	</head>
+	<body onerror="alert(event)">
+        <div id="ui-overlay">
+            <marquee style="background: #fff; padding: 10px;">UNREGISTERED VERSION !!!</marquee>
+            <br>
+            <div class="window" style="width: 210px;">
+                <div class="window-header">Information</div>
+                <div class="window-content">
+                    POS: <span id="position"></span><br>
+                    VEL: <span id="velocity"></span> m/s<br>
+                    DEL: <span id="delta"></span> s
+                </div>
+            </div>
+        </div>
+        <div id="scanline-overlay">
+        </div>
+	</body>
+</html>
